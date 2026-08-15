@@ -6,7 +6,11 @@ export default function PhotoUploadField({ photo, onChange }) {
   const inputRef = useRef(null)
 
   function handleFile(file) {
-    onChange({ id: `${file.name}-${file.size}-${file.lastModified}`, url: URL.createObjectURL(file) })
+    onChange({
+      id: `${file.name}-${file.size}-${file.lastModified}`,
+      url: URL.createObjectURL(file),
+      file,
+    })
   }
 
   function handleRemove() {

@@ -7,6 +7,7 @@ import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PhotoUploadField from '../../components/PhotoUploadField/PhotoUploadField'
 import Button from '../../components/Button/Button'
 import { CATEGORIES } from '../../data/categories'
+import { uploadPhoto } from '../../lib/voicesApi'
 import styles from './VoiceNewPage.module.css'
 
 export default function VoiceNewPage({ onCreate }) {
@@ -23,8 +24,8 @@ export default function VoiceNewPage({ onCreate }) {
     setSubmitting(true)
     setError(null)
     try {
-      // 사진은 현재 화면 미리보기만 지원한다 (Supabase Storage 미연결 - photo_url은 비워서 저장)
-      const voice = await onCreate({ title, body, category })
+      const photoUrl = photo?.file ? await uploadPhoto(photo.file) : null
+      const voice = await onCreate({ title, body, category, photoUrl })
       navigate(`/voices/${voice.id}`)
     } catch (err) {
       setError(err.message)
@@ -65,7 +66,7 @@ export default function VoiceNewPage({ onCreate }) {
             </div>
           </div>
           <div>
-            <span className={styles.label}>사진 첨부 (1장, 미리보기만 지원)</span>
+            <span className={styles.label}>사진 첨부 (1장)</span>
             <PhotoUploadField photo={photo} onChange={setPhoto} />
           </div>
           {error && <p className={styles.error}>저장에 실패했어요: {error}</p>}
