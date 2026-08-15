@@ -1,0 +1,46 @@
+.page {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.filterRow {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+/* design.md 반응형 3폭: 모바일 1열 / 태블릿 2열 / 데스크톱 3열 (고정 breakpoint, auto-fit 사용하지 않음) */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-gutter);
+}
+
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.empty {
+  composes: text-body-md from global;
+  color: var(--color-on-surface-variant);
+  padding: var(--space-xl) 0;
+  text-align: center;
+}

@@ -1,0 +1,70 @@
+/*
+  design.md 토큰 1:1 매핑 규칙:
+  colors.<key>   -> --color-<key>
+  rounded.<key>  -> --radius-<key>  (DEFAULT -> --radius-default)
+  spacing.<key>  -> --space-<key>
+  shadow.<key>   -> --shadow-<key>
+  단위는 design.md에 적힌 그대로 보존한다 (rem/px 변환하지 않음).
+*/
+:root {
+  --color-surface: #EDE7D9;
+  --color-surface-dim: #D8CFBC;
+  --color-surface-bright: #FBF8F0;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F5F1E6;
+  --color-surface-container: #EFE9DB;
+  --color-surface-container-high: #E7E0CF;
+  --color-surface-container-highest: #DFD7C2;
+  --color-on-surface: #2B241C;
+  --color-on-surface-variant: #5C5245;
+  --color-inverse-surface: #362E23;
+  --color-inverse-on-surface: #F5EFE2;
+  --color-outline: #8A7C68;
+  --color-outline-variant: #D9CFBA;
+  --color-primary: #A6452E;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #F0D9CD;
+  --color-on-primary-container: #4A1D0F;
+  --color-secondary: #5B6B4F;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #DCE3D2;
+  --color-on-secondary-container: #24301C;
+  --color-tertiary: #8C6A2F;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #EDE0C4;
+  --color-on-tertiary-container: #4A3710;
+  --color-background: #EDE7D9;
+  --color-on-background: #2B241C;
+
+  /* design.md -> components.badge-status-*  (상태 배지 3색 전용 별칭, 다른 곳에서 재사용 금지) */
+  --badge-received-bg: var(--color-tertiary-container);
+  --badge-received-fg: var(--color-on-tertiary-container);
+  --badge-progress-bg: var(--color-primary-container);
+  --badge-progress-fg: var(--color-on-primary-container);
+  --badge-done-bg: var(--color-secondary-container);
+  --badge-done-fg: var(--color-on-secondary-container);
+
+  --radius-sm: 0.5rem;
+  --radius-default: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-gutter: 16px;
+  --space-margin: 24px;
+
+  --shadow-sm: 0 1px 3px rgba(43, 36, 28, 0.08);
+  --shadow-md: 0 6px 16px rgba(166, 69, 46, 0.10);
+  --shadow-lg: 0 16px 32px rgba(166, 69, 46, 0.14);
+
+  --container-max-width: 1200px;
+  --container-max-width-narrow: 640px;
+
+  --font-family-base: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+}

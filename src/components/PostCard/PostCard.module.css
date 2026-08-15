@@ -1,0 +1,63 @@
+/* design.md -> components.card-post */
+.card {
+  display: block;
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 150ms ease-in-out;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.thumbnail {
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface-container-high);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.tags {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.title {
+  composes: text-title-md from global;
+  color: var(--color-on-surface);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.preview {
+  composes: text-body-md from global;
+  color: var(--color-on-surface-variant);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  composes: text-meta-sm from global;
+  color: var(--color-on-surface-variant);
+  margin-top: 2px;
+}

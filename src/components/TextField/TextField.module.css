@@ -1,0 +1,29 @@
+/* design.md -> components.input-field */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  composes: text-meta-sm from global;
+  color: var(--color-on-surface-variant);
+}
+
+.input {
+  background: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  composes: text-body-md from global;
+}
+
+.input::placeholder {
+  color: var(--color-on-surface-variant);
+}
+
+.input:focus {
+  outline: 2px solid var(--color-outline);
+  outline-offset: 1px;
+}

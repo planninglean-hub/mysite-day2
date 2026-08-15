@@ -1,0 +1,32 @@
+/* design.md -> components.badge-status-* */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  composes: text-meta-sm from global;
+}
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+}
+
+.received {
+  background: var(--badge-received-bg);
+  color: var(--badge-received-fg);
+}
+
+.progress {
+  background: var(--badge-progress-bg);
+  color: var(--badge-progress-fg);
+}
+
+.done {
+  background: var(--badge-done-bg);
+  color: var(--badge-done-fg);
+}

@@ -1,0 +1,23 @@
+/* design.md -> components.chip-category / chip-category-selected */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-outline-variant);
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface-variant);
+  composes: text-meta-sm from global;
+  white-space: nowrap;
+}
+
+button.chip {
+  border-width: 1px;
+}
+
+.selected {
+  background: var(--color-inverse-surface);
+  color: var(--color-inverse-on-surface);
+  border-color: transparent;
+}

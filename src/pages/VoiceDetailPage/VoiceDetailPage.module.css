@@ -1,0 +1,40 @@
+.page {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.tags {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.body {
+  composes: text-body-lg from global;
+  color: var(--color-on-surface);
+  white-space: pre-wrap;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  composes: text-meta-sm from global;
+  color: var(--color-on-surface-variant);
+}
+
+.photo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.notFound {
+  composes: text-body-md from global;
+  color: var(--color-on-surface-variant);
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: flex-start;
+}

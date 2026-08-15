@@ -1,0 +1,14 @@
+/* design.md -> components.avatar (중립색 고정, 상태 배지 색 재사용 금지) */
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
