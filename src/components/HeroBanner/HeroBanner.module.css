@@ -1,0 +1,40 @@
+/* design.md -> components.hero-banner */
+.hero {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  padding: var(--space-xxl) var(--space-margin);
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+}
+
+.name {
+  composes: text-headline-lg from global;
+  color: var(--color-on-secondary-container);
+}
+
+.tagline {
+  composes: text-body-lg from global;
+  color: var(--color-on-secondary-container);
+  margin: 0;
+}

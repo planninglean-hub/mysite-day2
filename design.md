@@ -257,6 +257,28 @@ components:
     textColor: "{colors.on-surface-variant}"
     rounded: "{rounded.full}"
     size: 24px
+  header:
+    height: 64px
+    backgroundColor: "{colors.surface-container-lowest}"
+    borderBottom: "1px solid {colors.outline-variant}"
+    padding: "0 {spacing.margin}"
+    iconSize: 32px
+    gap: "{spacing.sm}"
+    typography: "{typography.title-md}"
+    textColor: "{colors.on-surface}"
+  hero-banner:
+    backgroundColor: "{colors.secondary-container}"
+    textColor: "{colors.on-secondary-container}"
+    padding: "{spacing.xxl} {spacing.margin}"
+    contentMaxWidth: 640px
+    headlineTypography: "{typography.headline-lg}"
+    bodyTypography: "{typography.body-lg}"
+  footer:
+    backgroundColor: "{colors.inverse-surface}"
+    textColor: "{colors.inverse-on-surface}"
+    padding: "{spacing.xl} {spacing.margin}"
+    typography: "{typography.body-md}"
+    metaTypography: "{typography.meta-sm}"
 ---
 
 ## 브랜드 & 스타일
@@ -323,6 +345,33 @@ components:
 - 원본: `icon-src.svg`(라운드 배경) / `icon-maskable-src.svg`(풀블리드, 심볼 20% 축소)
 - 배포용: `icons/icon-192.png`, `icons/icon-512.png`, `icons/icon-maskable-512.png`, `icons/favicon.ico`
 - UI 내부에서 이 아이콘의 색 조합(보조색 배경 + 흰색 + 주색 포인트)을 다른 용도로 재사용하지 않는다 — 브랜드 마크 전용으로 남겨둔다.
+
+## 페이지 골격
+
+카드·배지 같은 낱개 컴포넌트와 별개로, 화면을 감싸는 뼈대(헤더·히어로·푸터)를 정한다. 색·타이포·간격은 위에서 정한 토큰만 재사용하고 새 값은 만들지 않는다.
+
+### 헤더 (`header`)
+
+- 높이 `64px` 고정, 스크롤해도 상단에 계속 보이게(`sticky`) 한다
+- 왼쪽부터 서비스 아이콘(32px, `icons/icon-192.png`) → 간격 `sm(8px)` → 단체명(`title-md`, `on-surface`)
+- 배경 `surface-container-lowest`(흰색), 페이지 배경(`surface`)과 구분되도록 하단에 `outline-variant 1px` 선만 긋는다 — 그림자는 얹지 않는다(면 색 구분만으로 충분)
+- 좌우 여백은 컨테이너 규칙과 동일하게 `margin(24px)`
+- 아이콘의 색 조합(보조색 배경 + 흰 집 + 주색 사람)은 헤더 안에서 다시 칠하지 않는다 — 원본 아이콘 파일을 그대로 얹는다
+
+### 홈 히어로 배너 (`hero-banner`)
+
+- 배경 `secondary-container`(연한 올리브, #DCE3D2), 글자 `on-secondary-container` — **주색은 쓰지 않는다**(아래 "하지 말 것" 참고)
+- 안쪽 여백 위아래 `xxl(64px)`, 좌우 `margin(24px)`
+- 내용은 가운데 정렬, 텍스트 폭은 `640px`로 좁혀 가독성을 확보한다(입력 폼과 같은 좁힘 규칙)
+- 구조(위→아래): 제목(`headline-lg`, 단체명 또는 환영 문구) → 소개 문구(`body-lg`, CLAUDE.md 한 줄 소개 "491세대가 이웃이 되어 함께 가꾸는...") → 필요하면 `button-primary` 하나(예: "의견 남기기")
+- 카드가 아니라 화면 폭 전체를 쓰는 띠(band)이므로 `rounded` 값을 쓰지 않는다 — 모서리 없이 사각형 그대로 둔다
+
+### 푸터 (`footer`)
+
+- 배경 `inverse-surface`(짙은 흙갈색, #362E23), 글자 `inverse-on-surface` — 페이지 가장 아래를 눌러 마무리하는 용도로 이미 정의된 반전 색을 그대로 쓴다(새 색 없음)
+- 안쪽 여백 위아래 `xl(40px)`, 좌우 `margin(24px)`
+- 내용: 단체명(`body-md`) → 한 줄 소개(`meta-sm`, 톤 낮춤) 순으로 세로 배치
+- 헤더와 마찬가지로 화면 폭 전체를 쓰는 띠이므로 `rounded` 값을 쓰지 않는다
 
 ## 컴포넌트
 
@@ -392,7 +441,7 @@ components:
 
 ## 하지 말 것
 
-- 주색(`#A6452E`)을 헤더 전체·카드 배경 전체처럼 넓은 면에 통째로 칠하지 않는다. 버튼·강조 텍스트·배지 등 좁은 면적에만 쓴다.
+- 주색(`#A6452E`)을 헤더·히어로 배너·카드 배경 전체처럼 넓은 면에 통째로 칠하지 않는다. 버튼·강조 텍스트·배지 등 좁은 면적에만 쓴다.
 - 그림자에 순수 검정/회색(`rgba(0,0,0,x)`)을 쓰지 않는다. 반드시 주색 계열로 옅게 틴트한다.
 - 모서리 반경을 `sm·DEFAULT·lg·xl·full` 다섯 값 밖에서 임의로 고르지 않는다.
 - 간격을 8px 스케일(`4·8·16·24·40·64`) 밖의 값(예: 10px, 15px, 20px)으로 쓰지 않는다.

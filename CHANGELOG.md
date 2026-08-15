@@ -9,3 +9,4 @@
 | 2026-08-15 18:10 | feat | src/lib, src/components/PhotoUploadField, src/pages/VoiceNewPage | Supabase Storage(photos 버킷) 연동, 글쓰기에서 실제 사진 업로드→공개 URL 저장 | 미리보기만 되던 사진 첨부를 실제 저장·표시까지 되는 사진 제보 기능으로 완성하기 위함 | Claude |
 | 2026-08-15 18:25 | fix | vercel.json | SPA 라우팅 rewrite 추가 (모든 경로를 index.html로) | Vercel 배포에서 /voices 등으로 새로고침 시 404가 나는 문제 수정 | Claude |
 | 2026-08-15 18:32 | fix | src/components/PhotoUploadField | 사진 첨부 드롭존에 실제 onDragOver/onDrop 핸들러 추가, 드래그 중 하이라이트 스타일 추가 | "끌어다 놓으세요" 안내 문구만 있고 실제 드래그앤드롭 기능이 구현되지 않았던 버그 수정 | Claude |
+| 2026-08-15 19:13 | feat | src/App.jsx, src/components/HeroBanner, design.md | 루트(/) 리다이렉트 제거해 목록을 바로 표시, 목록 위 히어로 배너(아이콘+단체명·한줄소개·의견 남기기 버튼) 추가, design.md에 페이지 골격(헤더·히어로·푸터) 규격 추가 | 아직 없는 화면을 가정한 리다이렉트를 걷어내고, 핵심 기능인 의견 목록을 진짜 홈으로 만들기 위함 | Claude |
