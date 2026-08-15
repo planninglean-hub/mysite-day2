@@ -6,7 +6,7 @@ import { formatRelativeTime } from '../../utils/formatDateTime'
 import styles from './PostCard.module.css'
 
 export default function PostCard({ voice }) {
-  const photo = voice.photos?.[0]
+  const { photo } = voice
 
   return (
     <Link to={`/voices/${voice.id}`} className={styles.card}>

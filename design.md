@@ -386,7 +386,7 @@ components:
 
 - **제목** — `input-field`(1줄), placeholder "제목을 입력하세요"
 - **내용** — `textarea-field`, 최소 높이 `160px`, 세로로만 크기 조절, 나머지 스타일은 `input-field`와 동일
-- **사진 올리기** — `upload-dropzone`: 점선 테두리(`outline-variant`, 1.5px dashed), 배경 `surface-container-low`, `rounded.lg`, 안쪽 여백 `xl(40px)`, 가운데에 안내 문구(`body-md`)와 아이콘. 업로드된 사진은 `thumbnail`(72px 정사각형, `rounded.sm`)로 8px 간격으로 가로 나열하고, 각 썸네일 우상단에 삭제 아이콘을 겹쳐 놓는다
+- **사진 올리기** — 1장만 첨부 가능(`photo_url` 단일 컬럼과 1:1 대응). `upload-dropzone`: 점선 테두리(`outline-variant`, 1.5px dashed), 배경 `surface-container-low`, `rounded.lg`, 안쪽 여백 `xl(40px)`, 가운데에 안내 문구(`body-md`)와 아이콘. 사진을 선택하면 드롭존이 `thumbnail`(72px 정사각형, `rounded.sm`) 하나로 바뀌고 우상단에 삭제 아이콘이 붙는다. 삭제하면 다시 드롭존으로 돌아간다
 - **작성자 · 작성시간**은 입력 항목이 아니다 — 로그인 사용자 정보와 서버 시각으로 자동 채워지며, 저장된 뒤 카드의 메타 영역에서만 보여준다
 - 입력 폼 전체 폭은 `card-post`와 같은 컨테이너 규칙(최대 1200px, 여백 24px)을 따르되, 실제 입력 영역은 가독성을 위해 최대 640px로 한 번 더 좁힌다
 

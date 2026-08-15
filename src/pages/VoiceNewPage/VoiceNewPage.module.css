@@ -24,6 +24,11 @@
   display: block;
 }
 
+.error {
+  composes: text-body-md from global;
+  color: var(--color-error);
+}
+
 .actions {
   display: flex;
   gap: var(--space-sm);

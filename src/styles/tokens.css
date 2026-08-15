@@ -35,6 +35,10 @@
   --color-on-tertiary-container: #4A3710;
   --color-background: #EDE7D9;
   --color-on-background: #2B241C;
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
 
   /* design.md -> components.badge-status-*  (상태 배지 3색 전용 별칭, 다른 곳에서 재사용 금지) */
   --badge-received-bg: var(--color-tertiary-container);

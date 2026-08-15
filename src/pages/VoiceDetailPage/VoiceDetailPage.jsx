@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button'
 import { formatFullDate } from '../../utils/formatDateTime'
 import styles from './VoiceDetailPage.module.css'
 
-export default function VoiceDetailPage({ voices }) {
+export default function VoiceDetailPage({ voices, loading }) {
   const { id } = useParams()
   const voice = voices.find((v) => v.id === id)
 
@@ -15,16 +15,18 @@ export default function VoiceDetailPage({ voices }) {
     return (
       <PageContainer maxWidth="narrow">
         <div className={styles.notFound}>
-          <p>글을 찾을 수 없어요.</p>
-          <Button variant="secondary" to="/voices">
-            목록으로
-          </Button>
+          <p>{loading ? '불러오는 중...' : '글을 찾을 수 없어요.'}</p>
+          {!loading && (
+            <Button variant="secondary" to="/voices">
+              목록으로
+            </Button>
+          )}
         </div>
       </PageContainer>
     )
   }
 
-  const photo = voice.photos?.[0]
+  const { photo } = voice
 
   return (
     <PageContainer maxWidth="narrow">

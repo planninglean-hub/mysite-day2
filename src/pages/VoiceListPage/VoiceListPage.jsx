@@ -3,10 +3,10 @@ import PageContainer from '../../components/PageContainer/PageContainer'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PostCard from '../../components/PostCard/PostCard'
 import Button from '../../components/Button/Button'
-import { CATEGORIES } from '../../data/mockVoices'
+import { CATEGORIES } from '../../data/categories'
 import styles from './VoiceListPage.module.css'
 
-export default function VoiceListPage({ voices }) {
+export default function VoiceListPage({ voices, loading, error }) {
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const filtered =
@@ -31,7 +31,11 @@ export default function VoiceListPage({ voices }) {
           ))}
         </div>
 
-        {filtered.length === 0 ? (
+        {error ? (
+          <p className={styles.empty}>불러오는 중 문제가 생겼어요: {error}</p>
+        ) : loading ? (
+          <p className={styles.empty}>불러오는 중...</p>
+        ) : filtered.length === 0 ? (
           <p className={styles.empty}>이 분야에 등록된 의견이 아직 없어요.</p>
         ) : (
           <div className={styles.grid}>

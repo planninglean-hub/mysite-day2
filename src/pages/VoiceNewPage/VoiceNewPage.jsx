@@ -6,7 +6,7 @@ import TextAreaField from '../../components/TextAreaField/TextAreaField'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PhotoUploadField from '../../components/PhotoUploadField/PhotoUploadField'
 import Button from '../../components/Button/Button'
-import { CATEGORIES, buildNewVoice } from '../../data/mockVoices'
+import { CATEGORIES } from '../../data/categories'
 import styles from './VoiceNewPage.module.css'
 
 export default function VoiceNewPage({ onCreate }) {
@@ -14,13 +14,22 @@ export default function VoiceNewPage({ onCreate }) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [category, setCategory] = useState(CATEGORIES[0])
-  const [photos, setPhotos] = useState([])
+  const [photo, setPhoto] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const voice = buildNewVoice({ title, body, category, photos })
-    onCreate(voice)
-    navigate(`/voices/${voice.id}`)
+    setSubmitting(true)
+    setError(null)
+    try {
+      // 사진은 현재 화면 미리보기만 지원한다 (Supabase Storage 미연결 - photo_url은 비워서 저장)
+      const voice = await onCreate({ title, body, category })
+      navigate(`/voices/${voice.id}`)
+    } catch (err) {
+      setError(err.message)
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -56,14 +65,17 @@ export default function VoiceNewPage({ onCreate }) {
             </div>
           </div>
           <div>
-            <span className={styles.label}>사진 첨부</span>
-            <PhotoUploadField photos={photos} onChange={setPhotos} />
+            <span className={styles.label}>사진 첨부 (1장, 미리보기만 지원)</span>
+            <PhotoUploadField photo={photo} onChange={setPhoto} />
           </div>
+          {error && <p className={styles.error}>저장에 실패했어요: {error}</p>}
           <div className={styles.actions}>
             <Button variant="secondary" to="/voices">
               취소
             </Button>
-            <Button type="submit">등록하기</Button>
+            <Button type="submit" disabled={submitting}>
+              {submitting ? '등록 중...' : '등록하기'}
+            </Button>
           </div>
         </form>
       </div>

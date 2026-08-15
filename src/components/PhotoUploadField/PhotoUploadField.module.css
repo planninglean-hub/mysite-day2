@@ -22,13 +22,6 @@
   display: none;
 }
 
-.thumbnailRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-sm);
-}
-
 .thumbnail {
   position: relative;
   width: 72px;
