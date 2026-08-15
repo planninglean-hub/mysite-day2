@@ -18,6 +18,11 @@
   background: var(--color-surface-container);
 }
 
+.dragOver {
+  border-color: var(--color-primary);
+  background: var(--color-surface-container);
+}
+
 .hiddenInput {
   display: none;
 }

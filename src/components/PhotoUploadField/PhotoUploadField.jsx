@@ -1,9 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { IconPhotoUp, IconX } from '@tabler/icons-react'
 import styles from './PhotoUploadField.module.css'
 
 export default function PhotoUploadField({ photo, onChange }) {
   const inputRef = useRef(null)
+  const [isDragOver, setIsDragOver] = useState(false)
 
   function handleFile(file) {
     onChange({
@@ -15,6 +16,22 @@ export default function PhotoUploadField({ photo, onChange }) {
 
   function handleRemove() {
     onChange(null)
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault()
+    setIsDragOver(true)
+  }
+
+  function handleDragLeave() {
+    setIsDragOver(false)
+  }
+
+  function handleDrop(e) {
+    e.preventDefault()
+    setIsDragOver(false)
+    const file = Array.from(e.dataTransfer.files ?? []).find((f) => f.type.startsWith('image/'))
+    if (file) handleFile(file)
   }
 
   if (photo) {
@@ -35,7 +52,14 @@ export default function PhotoUploadField({ photo, onChange }) {
 
   return (
     <div>
-      <button type="button" className={styles.dropzone} onClick={() => inputRef.current?.click()}>
+      <button
+        type="button"
+        className={`${styles.dropzone} ${isDragOver ? styles.dragOver : ''}`}
+        onClick={() => inputRef.current?.click()}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
         <IconPhotoUp size={24} stroke={1.5} aria-hidden="true" />
         <span>사진을 선택하거나 여기로 끌어다 놓으세요</span>
       </button>
