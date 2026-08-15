@@ -273,6 +273,10 @@ components:
     contentMaxWidth: 640px
     headlineTypography: "{typography.headline-lg}"
     bodyTypography: "{typography.body-lg}"
+    statValueTypography: "{typography.title-md}"
+    statValueColor: "{colors.primary}"
+    statLabelTypography: "{typography.meta-sm}"
+    statLabelColor: "{colors.secondary}"
   footer:
     backgroundColor: "{colors.inverse-surface}"
     textColor: "{colors.inverse-on-surface}"
@@ -363,7 +367,8 @@ components:
 - 배경 `secondary-container`(연한 올리브, #DCE3D2), 글자 `on-secondary-container` — **주색은 쓰지 않는다**(아래 "하지 말 것" 참고)
 - 안쪽 여백 위아래 `xxl(64px)`, 좌우 `margin(24px)`
 - 내용은 가운데 정렬, 텍스트 폭은 `640px`로 좁혀 가독성을 확보한다(입력 폼과 같은 좁힘 규칙)
-- 구조(위→아래): 제목(`headline-lg`, 단체명 또는 환영 문구) → 소개 문구(`body-lg`, CLAUDE.md 한 줄 소개 "491세대가 이웃이 되어 함께 가꾸는...") → 필요하면 `button-primary` 하나(예: "의견 남기기")
+- 구조(위→아래): 제목(`headline-lg`, 단체명 또는 환영 문구) → 소개 문구(`body-lg`, CLAUDE.md 한 줄 소개 "491세대가 이웃이 되어 함께 가꾸는...") → 실데이터 통계(있을 때만) → `button-primary` 하나("의견 남기기", 서비스 전체에서 이 버튼이 유일한 글쓰기 진입점이다 — 목록 화면 등 다른 곳에 중복 배치하지 않는다)
+- 통계는 실제 데이터로만 채운다(약속 문구·가상의 숫자 금지): "누적 의견 N건" · "처리 완료 N건" 두 항목을 `title-md`(숫자, 주색)/`meta-sm`(라벨, 보조색)로 가로 배치하고 사이에 1px 구분선(`outline-variant`)을 둔다. 데이터가 아직 하나도 없으면 통계 자체를 숨긴다
 - 카드가 아니라 화면 폭 전체를 쓰는 띠(band)이므로 `rounded` 값을 쓰지 않는다 — 모서리 없이 사각형 그대로 둔다
 
 ### 푸터 (`footer`)

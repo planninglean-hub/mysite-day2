@@ -38,3 +38,33 @@
   color: var(--color-on-secondary-container);
   margin: 0;
 }
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm) 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.statValue {
+  composes: text-title-md from global;
+  color: var(--color-primary);
+}
+
+.statLabel {
+  composes: text-meta-sm from global;
+  color: var(--color-secondary);
+}
+
+.statDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-outline-variant);
+}

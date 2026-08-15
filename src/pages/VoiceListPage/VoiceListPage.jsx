@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PageContainer from '../../components/PageContainer/PageContainer'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PostCard from '../../components/PostCard/PostCard'
-import Button from '../../components/Button/Button'
 import { CATEGORIES } from '../../data/categories'
 import styles from './VoiceListPage.module.css'
 
@@ -17,7 +16,6 @@ export default function VoiceListPage({ voices, loading, error }) {
       <div className={styles.page}>
         <div className={styles.header}>
           <h1 className="text-headline-lg">우리 동네 목소리함</h1>
-          <Button to="/voices/new">의견 쓰기</Button>
         </div>
 
         <div className={styles.filterRow}>

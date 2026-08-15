@@ -26,7 +26,7 @@ export default function App() {
 
   const homePage = (
     <>
-      <HeroBanner />
+      <HeroBanner voices={voices} loading={loading} />
       <VoiceListPage voices={voices} loading={loading} error={error} />
     </>
   )
