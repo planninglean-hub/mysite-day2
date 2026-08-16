@@ -10,6 +10,7 @@ function rowToVoice(row) {
     status: row.status,
     photo: row.photo_url ? { id: row.id, url: row.photo_url } : null,
     createdAt: row.created_at,
+    userId: row.user_id,
   }
 }
 
@@ -36,14 +37,15 @@ export async function fetchVoices() {
   return data.map(rowToVoice)
 }
 
-export async function createVoice({ title, body, category, photoUrl }) {
+export async function createVoice({ title, body, category, photoUrl, userId, author }) {
   const { data, error } = await supabase
     .from('voices')
     .insert({
       title,
       body,
       category,
-      author: '나',
+      author,
+      user_id: userId,
       status: '접수',
       photo_url: photoUrl ?? null,
     })
@@ -52,4 +54,26 @@ export async function createVoice({ title, body, category, photoUrl }) {
 
   if (error) throw error
   return rowToVoice(data)
+}
+
+export async function updateVoice(id, { title, body, category, photoUrl }) {
+  const { data, error } = await supabase
+    .from('voices')
+    .update({
+      title,
+      body,
+      category,
+      photo_url: photoUrl ?? null,
+    })
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) throw error
+  return rowToVoice(data)
+}
+
+export async function deleteVoice(id) {
+  const { error } = await supabase.from('voices').delete().eq('id', id)
+  if (error) throw error
 }

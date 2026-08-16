@@ -1,0 +1,22 @@
+.container {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-xl);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--color-inverse-surface);
+  color: var(--color-inverse-on-surface);
+  border-radius: var(--radius-default);
+  padding: var(--space-sm) var(--space-lg);
+  box-shadow: var(--shadow-lg);
+  composes: text-body-md from global;
+  white-space: nowrap;
+}

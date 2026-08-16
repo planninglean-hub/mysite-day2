@@ -1,7 +1,9 @@
 import Button from '../Button/Button'
+import { useAuth } from '../../context/AuthContext'
 import styles from './HeroBanner.module.css'
 
 export default function HeroBanner({ voices = [], loading = false }) {
+  const { user } = useAuth()
   const total = voices.length
   const done = voices.filter((v) => v.status === '완료').length
 
@@ -26,7 +28,7 @@ export default function HeroBanner({ voices = [], loading = false }) {
             </div>
           </div>
         )}
-        <Button to="/voices/new">의견 남기기</Button>
+        <Button to={user ? '/voices/new' : '/login'}>의견 남기기</Button>
       </div>
     </section>
   )

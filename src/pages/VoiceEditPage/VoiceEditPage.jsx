@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import PageContainer from '../../components/PageContainer/PageContainer'
 import TextField from '../../components/TextField/TextField'
 import TextAreaField from '../../components/TextAreaField/TextAreaField'
@@ -9,15 +9,18 @@ import Button from '../../components/Button/Button'
 import { CATEGORIES } from '../../data/categories'
 import { uploadPhoto } from '../../lib/voicesApi'
 import { useAuth } from '../../context/AuthContext'
-import styles from './VoiceNewPage.module.css'
+import styles from '../VoiceNewPage/VoiceNewPage.module.css'
 
-export default function VoiceNewPage({ onCreate }) {
-  const navigate = useNavigate()
+export default function VoiceEditPage({ voices, loading, onUpdate }) {
+  const { id } = useParams()
   const { user } = useAuth()
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-  const [category, setCategory] = useState(CATEGORIES[0])
-  const [photo, setPhoto] = useState(null)
+  const navigate = useNavigate()
+  const voice = voices.find((v) => v.id === id)
+
+  const [title, setTitle] = useState(voice?.title ?? '')
+  const [body, setBody] = useState(voice?.body ?? '')
+  const [category, setCategory] = useState(voice?.category ?? CATEGORIES[0])
+  const [photo, setPhoto] = useState(voice?.photo ? { id: voice.photo.id, url: voice.photo.url } : null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
 
@@ -25,14 +28,27 @@ export default function VoiceNewPage({ onCreate }) {
     return <Navigate to="/login" replace />
   }
 
+  if (!voice) {
+    return (
+      <PageContainer maxWidth="narrow">
+        <div className={styles.page}>
+          <p>{loading ? '불러오는 중...' : '글을 찾을 수 없어요.'}</p>
+        </div>
+      </PageContainer>
+    )
+  }
+
+  if (voice.userId !== user.id) {
+    return <Navigate to="/mypage" replace />
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setSubmitting(true)
     setError(null)
     try {
-      const photoUrl = photo?.file ? await uploadPhoto(photo.file) : null
-      const author = user.user_metadata?.full_name ?? user.email ?? '이웃'
-      const voice = await onCreate({ title, body, category, photoUrl, userId: user.id, author })
+      const photoUrl = photo?.file ? await uploadPhoto(photo.file) : (photo?.url ?? null)
+      await onUpdate(voice.id, { title, body, category, photoUrl })
       navigate(`/voices/${voice.id}`)
     } catch (err) {
       setError(err.message)
@@ -43,7 +59,7 @@ export default function VoiceNewPage({ onCreate }) {
   return (
     <PageContainer maxWidth="narrow">
       <div className={styles.page}>
-        <h1 className="text-headline-lg">의견 쓰기</h1>
+        <h1 className="text-headline-lg">의견 수정</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <TextField
             label="제목"
@@ -76,13 +92,13 @@ export default function VoiceNewPage({ onCreate }) {
             <span className={styles.label}>사진 첨부 (1장)</span>
             <PhotoUploadField photo={photo} onChange={setPhoto} />
           </div>
-          {error && <p className={styles.error}>저장에 실패했어요: {error}</p>}
+          {error && <p className={styles.error}>수정에 실패했어요: {error}</p>}
           <div className={styles.actions}>
-            <Button variant="secondary" to="/voices">
+            <Button variant="secondary" to={`/voices/${voice.id}`}>
               취소
             </Button>
             <Button type="submit" disabled={submitting}>
-              {submitting ? '등록 중...' : '등록하기'}
+              {submitting ? '저장 중...' : '저장하기'}
             </Button>
           </div>
         </form>

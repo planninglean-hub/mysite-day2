@@ -5,6 +5,7 @@
 | 일시 | 유형 | 범위 | 변경내용 | 변경사유 | 작성AI |
 |---|---|---|---|---|---|
 | YYYY-MM-DD HH:MM | feat/fix/refactor/docs/chore | area-or-folder | 변경 요약 | 변경 이유·목적 | Claude/Codex/Gemini |
+| 2026-08-16 16:22 | feat | src/context, src/components/Header, src/pages/AuthGatePage, src/pages/AuthCallbackPage, src/pages/MyPage, src/pages/VoiceEditPage, src/lib/voicesApi.js, supabase(voices RLS) | 구글 로그인/회원가입 흐름 추가: AuthContext·ToastContext, 헤더 로그인/회원가입 버튼과 로그인 후 아바타+드롭다운(마이페이지/로그아웃), /login·/signup 게이트 화면과 구글 확인 팝업, /auth/callback에서 신규가입·기존로그인 판별 토스트, 마이페이지(내가 쓴 글/내 정보) 탭과 글 수정·삭제, voices.user_id 컬럼 및 본인 글만 수정/삭제 가능한 RLS 정책 | 비로그인 상태의 서비스에 실제 사용자 계정·소유권 개념을 도입해 글 작성자를 식별하고 본인 글만 관리할 수 있게 하기 위함 | Claude |
 | 2026-08-15 17:50 | feat | src/lib, src/pages, src/data | Supabase 연동(voices 테이블 조회/저장), 사진 첨부 1장 제한, mockVoices→categories 정리, tokens.css error 색상 보완 | 목소리함 화면을 실제 Supabase 백엔드에 연결해 의견이 저장·조회되도록 하기 위함 | Claude |
 | 2026-08-15 18:10 | feat | src/lib, src/components/PhotoUploadField, src/pages/VoiceNewPage | Supabase Storage(photos 버킷) 연동, 글쓰기에서 실제 사진 업로드→공개 URL 저장 | 미리보기만 되던 사진 첨부를 실제 저장·표시까지 되는 사진 제보 기능으로 완성하기 위함 | Claude |
 | 2026-08-15 18:25 | fix | vercel.json | SPA 라우팅 rewrite 추가 (모든 경로를 index.html로) | Vercel 배포에서 /voices 등으로 새로고침 시 404가 나는 문제 수정 | Claude |

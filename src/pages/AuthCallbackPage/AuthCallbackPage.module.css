@@ -1,0 +1,13 @@
+.page {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+}
+
+.message {
+  composes: text-body-md from global;
+  color: var(--color-on-surface-variant);
+}
