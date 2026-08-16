@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import PageContainer from '../../components/PageContainer/PageContainer'
 import TextField from '../../components/TextField/TextField'
@@ -6,20 +6,23 @@ import TextAreaField from '../../components/TextAreaField/TextAreaField'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PhotoUploadField from '../../components/PhotoUploadField/PhotoUploadField'
 import Button from '../../components/Button/Button'
-import { CATEGORIES } from '../../data/categories'
 import { uploadPhoto } from '../../lib/voicesApi'
 import { useAuth } from '../../context/AuthContext'
 import styles from './VoiceNewPage.module.css'
 
-export default function VoiceNewPage({ onCreate }) {
+export default function VoiceNewPage({ onCreate, categories = [] }) {
   const navigate = useNavigate()
   const { user } = useAuth()
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [category, setCategory] = useState(CATEGORIES[0])
+  const [category, setCategory] = useState('')
   const [photo, setPhoto] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (!category && categories.length > 0) setCategory(categories[0])
+  }, [category, categories])
 
   if (!user) {
     return <Navigate to="/login" replace />
@@ -62,7 +65,7 @@ export default function VoiceNewPage({ onCreate }) {
           <div>
             <span className={styles.label}>분야</span>
             <div className={styles.categoryRow}>
-              {CATEGORIES.map((c) => (
+              {categories.map((c) => (
                 <CategoryChip
                   key={c}
                   label={c}

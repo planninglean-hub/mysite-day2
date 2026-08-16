@@ -1,0 +1,57 @@
+/* design.md -> components.button-status-* / button-status-group */
+.group {
+  display: inline-flex;
+}
+
+.button {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px var(--space-md);
+  border: 1px solid transparent;
+  composes: text-label-lg from global;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.button + .button {
+  margin-left: -1px;
+}
+
+.first {
+  border-top-left-radius: var(--radius-default);
+  border-bottom-left-radius: var(--radius-default);
+}
+
+.last {
+  border-top-right-radius: var(--radius-default);
+  border-bottom-right-radius: var(--radius-default);
+}
+
+.unselected {
+  background: transparent;
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-surface-variant);
+}
+.unselected:hover {
+  background: var(--color-surface-container-high);
+}
+
+.received {
+  background: var(--badge-received-bg);
+  color: var(--badge-received-fg);
+}
+
+.progress {
+  background: var(--badge-progress-bg);
+  color: var(--badge-progress-fg);
+}
+
+.done {
+  background: var(--badge-done-bg);
+  color: var(--badge-done-fg);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

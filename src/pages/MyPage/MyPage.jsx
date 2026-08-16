@@ -5,9 +5,15 @@ import StatusBadge from '../../components/StatusBadge/StatusBadge'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import Button from '../../components/Button/Button'
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog'
+import Tabs from '../../components/Tabs/Tabs'
 import { useAuth } from '../../context/AuthContext'
 import { formatRelativeTime } from '../../utils/formatDateTime'
 import styles from './MyPage.module.css'
+
+const TABS = [
+  { value: 'posts', label: '내가 쓴 글' },
+  { value: 'profile', label: '내 정보' },
+]
 
 export default function MyPage({ voices, loading, onDelete }) {
   const { user, signOut } = useAuth()
@@ -39,22 +45,7 @@ export default function MyPage({ voices, loading, onDelete }) {
       <div className={styles.page}>
         <h1 className="text-headline-lg">마이페이지</h1>
 
-        <div className={styles.tabs}>
-          <button
-            type="button"
-            className={`${styles.tab} ${tab === 'posts' ? styles.active : ''}`}
-            onClick={() => setTab('posts')}
-          >
-            내가 쓴 글
-          </button>
-          <button
-            type="button"
-            className={`${styles.tab} ${tab === 'profile' ? styles.active : ''}`}
-            onClick={() => setTab('profile')}
-          >
-            내 정보
-          </button>
-        </div>
+        <Tabs tabs={TABS} active={tab} onChange={setTab} />
 
         {tab === 'posts' ? (
           <div className={styles.list}>

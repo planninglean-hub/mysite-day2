@@ -73,6 +73,18 @@ export async function updateVoice(id, { title, body, category, photoUrl }) {
   return rowToVoice(data)
 }
 
+export async function updateVoiceStatus(id, status) {
+  const { data, error } = await supabase
+    .from('voices')
+    .update({ status })
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) throw error
+  return rowToVoice(data)
+}
+
 export async function deleteVoice(id) {
   const { error } = await supabase.from('voices').delete().eq('id', id)
   if (error) throw error

@@ -1,0 +1,137 @@
+.page {
+  padding: var(--space-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* design.md -> components.card-post (관리자 목록용 압축 변형) */
+.card {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.rowTop {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.itemTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.meta {
+  composes: text-meta-sm from global;
+  color: var(--color-on-surface-variant);
+}
+
+.title {
+  composes: text-title-md from global;
+  color: var(--color-on-surface);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title:hover {
+  text-decoration: underline;
+}
+
+.rowActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.deleteButton {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-default);
+  border: 1px solid var(--color-outline-variant);
+  background: transparent;
+  color: var(--color-error);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.deleteButton:hover {
+  background: var(--color-error-container);
+}
+
+.empty {
+  composes: text-body-md from global;
+  color: var(--color-on-surface-variant);
+  padding: var(--space-xl) 0;
+  text-align: center;
+}
+
+/* design.md -> components.card-auth 배경/모서리/그림자 규격을 재사용한 카드 */
+.catCard {
+  background: var(--color-surface-container-lowest);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.label {
+  composes: text-meta-sm from global;
+  color: var(--color-on-surface-variant);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.categoryForm {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  max-width: 400px;
+  margin-bottom: var(--space-lg);
+}
+
+.categoryInput {
+  flex: 1;
+}
+
+.categoryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.error {
+  composes: text-meta-sm from global;
+  color: var(--color-error);
+  margin-bottom: var(--space-sm);
+}

@@ -2,10 +2,9 @@ import { useState } from 'react'
 import PageContainer from '../../components/PageContainer/PageContainer'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PostCard from '../../components/PostCard/PostCard'
-import { CATEGORIES } from '../../data/categories'
 import styles from './VoiceListPage.module.css'
 
-export default function VoiceListPage({ voices, loading, error }) {
+export default function VoiceListPage({ voices, loading, error, categories = [] }) {
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const filtered =
@@ -19,7 +18,7 @@ export default function VoiceListPage({ voices, loading, error }) {
         </div>
 
         <div className={styles.filterRow}>
-          {['전체', ...CATEGORIES].map((category) => (
+          {['전체', ...categories].map((category) => (
             <CategoryChip
               key={category}
               label={category}

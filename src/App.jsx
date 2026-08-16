@@ -9,19 +9,33 @@ import VoiceDetailPage from './pages/VoiceDetailPage/VoiceDetailPage'
 import AuthGatePage from './pages/AuthGatePage/AuthGatePage'
 import AuthCallbackPage from './pages/AuthCallbackPage/AuthCallbackPage'
 import MyPage from './pages/MyPage/MyPage'
-import { fetchVoices, createVoice, updateVoice, deleteVoice } from './lib/voicesApi'
+import AdminPage from './pages/AdminPage/AdminPage'
+import { fetchVoices, createVoice, updateVoice, updateVoiceStatus, deleteVoice } from './lib/voicesApi'
+import { fetchCategories, addCategory, deleteCategory } from './lib/categoriesApi'
 
 export default function App() {
   const [voices, setVoices] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     fetchVoices()
       .then(setVoices)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false))
+    fetchCategories().then(setCategories)
   }, [])
+
+  async function handleAddCategory(name) {
+    await addCategory(name)
+    setCategories((prev) => [...prev, name])
+  }
+
+  async function handleDeleteCategory(name) {
+    await deleteCategory(name)
+    setCategories((prev) => prev.filter((c) => c !== name))
+  }
 
   async function handleCreateVoice(payload) {
     const voice = await createVoice(payload)
@@ -35,6 +49,12 @@ export default function App() {
     return voice
   }
 
+  async function handleUpdateVoiceStatus(id, status) {
+    const voice = await updateVoiceStatus(id, status)
+    setVoices((prev) => prev.map((v) => (v.id === id ? voice : v)))
+    return voice
+  }
+
   async function handleDeleteVoice(id) {
     await deleteVoice(id)
     setVoices((prev) => prev.filter((v) => v.id !== id))
@@ -43,7 +63,7 @@ export default function App() {
   const homePage = (
     <>
       <HeroBanner voices={voices} loading={loading} />
-      <VoiceListPage voices={voices} loading={loading} error={error} />
+      <VoiceListPage voices={voices} loading={loading} error={error} categories={categories} />
     </>
   )
 
@@ -53,7 +73,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={homePage} />
         <Route path="/voices" element={homePage} />
-        <Route path="/voices/new" element={<VoiceNewPage onCreate={handleCreateVoice} />} />
+        <Route
+          path="/voices/new"
+          element={<VoiceNewPage onCreate={handleCreateVoice} categories={categories} />}
+        />
         <Route
           path="/voices/:id"
           element={<VoiceDetailPage voices={voices} loading={loading} />}
@@ -61,7 +84,12 @@ export default function App() {
         <Route
           path="/voices/:id/edit"
           element={
-            <VoiceEditPage voices={voices} loading={loading} onUpdate={handleUpdateVoice} />
+            <VoiceEditPage
+              voices={voices}
+              loading={loading}
+              onUpdate={handleUpdateVoice}
+              categories={categories}
+            />
           }
         />
         <Route path="/login" element={<AuthGatePage mode="login" />} />
@@ -70,6 +98,20 @@ export default function App() {
         <Route
           path="/mypage"
           element={<MyPage voices={voices} loading={loading} onDelete={handleDeleteVoice} />}
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminPage
+              voices={voices}
+              loading={loading}
+              categories={categories}
+              onUpdateStatus={handleUpdateVoiceStatus}
+              onDelete={handleDeleteVoice}
+              onAddCategory={handleAddCategory}
+              onDeleteCategory={handleDeleteCategory}
+            />
+          }
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

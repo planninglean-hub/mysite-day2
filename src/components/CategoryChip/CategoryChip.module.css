@@ -21,3 +21,15 @@ button.chip {
   color: var(--color-inverse-on-surface);
   border-color: transparent;
 }
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--space-sm);
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}

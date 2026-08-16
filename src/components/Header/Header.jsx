@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import styles from './Header.module.css'
 
 export default function Header() {
-  const { user, signOut } = useAuth()
+  const { user, isAdmin, signOut } = useAuth()
   const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef(null)
@@ -57,6 +57,11 @@ export default function Header() {
               <Link to="/mypage" className={styles.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
                 마이페이지
               </Link>
+              {isAdmin && (
+                <Link to="/admin" className={styles.dropdownItem} role="menuitem" onClick={() => setMenuOpen(false)}>
+                  관리자 화면
+                </Link>
+              )}
               <button type="button" className={styles.dropdownItem} role="menuitem" onClick={handleSignOut}>
                 로그아웃
               </button>

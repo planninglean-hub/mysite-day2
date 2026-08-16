@@ -6,6 +6,7 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -19,6 +20,21 @@ export function AuthProvider({ children }) {
 
     return () => listener.subscription.unsubscribe()
   }, [])
+
+  useEffect(() => {
+    const userId = session?.user?.id
+    if (!userId) {
+      setIsAdmin(false)
+      return
+    }
+    let cancelled = false
+    supabase.rpc('is_admin').then(({ data, error }) => {
+      if (!cancelled) setIsAdmin(!error && data === true)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [session?.user?.id])
 
   async function signInWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
@@ -39,6 +55,7 @@ export function AuthProvider({ children }) {
     session,
     user: session?.user ?? null,
     loading,
+    isAdmin,
     signInWithGoogle,
     signOut,
   }

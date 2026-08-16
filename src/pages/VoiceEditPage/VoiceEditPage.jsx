@@ -6,12 +6,11 @@ import TextAreaField from '../../components/TextAreaField/TextAreaField'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PhotoUploadField from '../../components/PhotoUploadField/PhotoUploadField'
 import Button from '../../components/Button/Button'
-import { CATEGORIES } from '../../data/categories'
 import { uploadPhoto } from '../../lib/voicesApi'
 import { useAuth } from '../../context/AuthContext'
 import styles from '../VoiceNewPage/VoiceNewPage.module.css'
 
-export default function VoiceEditPage({ voices, loading, onUpdate }) {
+export default function VoiceEditPage({ voices, loading, onUpdate, categories = [] }) {
   const { id } = useParams()
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -19,7 +18,7 @@ export default function VoiceEditPage({ voices, loading, onUpdate }) {
 
   const [title, setTitle] = useState(voice?.title ?? '')
   const [body, setBody] = useState(voice?.body ?? '')
-  const [category, setCategory] = useState(voice?.category ?? CATEGORIES[0])
+  const [category, setCategory] = useState(voice?.category ?? '')
   const [photo, setPhoto] = useState(voice?.photo ? { id: voice.photo.id, url: voice.photo.url } : null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
@@ -78,7 +77,7 @@ export default function VoiceEditPage({ voices, loading, onUpdate }) {
           <div>
             <span className={styles.label}>분야</span>
             <div className={styles.categoryRow}>
-              {CATEGORIES.map((c) => (
+              {categories.map((c) => (
                 <CategoryChip
                   key={c}
                   label={c}
