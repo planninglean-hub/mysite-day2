@@ -1,7 +1,12 @@
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
 const GEMINI_MODEL = 'gemini-3.5-flash-lite'
 
 async function readJsonBody(req) {
-  if (req.body && typeof req.body === 'object') return req.body
   if (typeof req.body === 'string') return req.body ? JSON.parse(req.body) : {}
 
   const chunks = []
