@@ -1,0 +1,30 @@
+{
+  "name": "위스테이별내 사회적협동조합",
+  "short_name": "위스테이별내 사회적협동조합",
+  "description": "491세대가 이웃이 되어 함께 가꾸는 협동조합형 공동체 아파트",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#EDE7D9",
+  "theme_color": "#A6452E",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
