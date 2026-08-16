@@ -5,6 +5,14 @@
   gap: var(--space-lg);
 }
 
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
 .form {
   display: flex;
   flex-direction: column;

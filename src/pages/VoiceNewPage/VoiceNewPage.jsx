@@ -1,24 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { IconSparkles } from '@tabler/icons-react'
 import PageContainer from '../../components/PageContainer/PageContainer'
 import TextField from '../../components/TextField/TextField'
 import TextAreaField from '../../components/TextAreaField/TextAreaField'
 import CategoryChip from '../../components/CategoryChip/CategoryChip'
 import PhotoUploadField from '../../components/PhotoUploadField/PhotoUploadField'
 import Button from '../../components/Button/Button'
+import AiAssistDialog from '../../components/AiAssistDialog/AiAssistDialog'
 import { uploadPhoto } from '../../lib/voicesApi'
 import { useAuth } from '../../context/AuthContext'
+import { useToast } from '../../context/ToastContext'
 import styles from './VoiceNewPage.module.css'
 
 export default function VoiceNewPage({ onCreate, categories = [] }) {
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { showToast } = useToast()
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [category, setCategory] = useState('')
   const [photo, setPhoto] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+  const [aiDialogOpen, setAiDialogOpen] = useState(false)
 
   useEffect(() => {
     if (!category && categories.length > 0) setCategory(categories[0])
@@ -26,6 +31,16 @@ export default function VoiceNewPage({ onCreate, categories = [] }) {
 
   if (!user) {
     return <Navigate to="/login" replace />
+  }
+
+  function handleAiApply(result) {
+    setTitle(result.title)
+    setBody(result.body)
+    if (categories.includes(result.category)) {
+      setCategory(result.category)
+    }
+    setAiDialogOpen(false)
+    showToast('AI가 초안을 작성했어요. 내용을 확인하고 등록해주세요.')
   }
 
   async function handleSubmit(e) {
@@ -46,7 +61,13 @@ export default function VoiceNewPage({ onCreate, categories = [] }) {
   return (
     <PageContainer maxWidth="narrow">
       <div className={styles.page}>
-        <h1 className="text-headline-lg">의견 쓰기</h1>
+        <div className={styles.headerRow}>
+          <h1 className="text-headline-lg">의견 쓰기</h1>
+          <Button variant="secondary" onClick={() => setAiDialogOpen(true)}>
+            <IconSparkles size={18} />
+            AI 작성도우미
+          </Button>
+        </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <TextField
             label="제목"
@@ -89,6 +110,12 @@ export default function VoiceNewPage({ onCreate, categories = [] }) {
             </Button>
           </div>
         </form>
+        <AiAssistDialog
+          open={aiDialogOpen}
+          categories={categories}
+          onApply={handleAiApply}
+          onClose={() => setAiDialogOpen(false)}
+        />
       </div>
     </PageContainer>
   )
