@@ -17,20 +17,10 @@
   gap: var(--space-md);
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.icon {
-  width: 48px;
-  height: 48px;
-}
-
-.name {
+.headline {
   composes: text-headline-lg from global;
   color: var(--color-on-secondary-container);
+  margin: 0;
 }
 
 .tagline {

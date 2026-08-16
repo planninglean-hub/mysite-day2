@@ -16,11 +16,13 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  min-width: 0;
   color: var(--color-on-surface);
   text-decoration: none;
 }
 
 .icon {
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
@@ -29,12 +31,16 @@
 .name {
   composes: text-title-md from global;
   color: var(--color-on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .actions {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-shrink: 0;
 }
 
 .navButton {
@@ -48,6 +54,7 @@
   color: var(--color-on-surface);
   composes: text-label-lg from global;
   text-decoration: none;
+  white-space: nowrap;
   transition: background-color 150ms ease-in-out;
 }
 .navButton:hover {

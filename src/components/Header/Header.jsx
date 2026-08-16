@@ -32,7 +32,7 @@ export default function Header() {
     <header className={styles.header}>
       <Link to="/" className={styles.brand}>
         <img src="/icons/icon-192.png" alt="" className={styles.icon} />
-        <span className={styles.name}>위스테이별내 사회적협동조합</span>
+        <span className={styles.name}>우리 동네 목소리함</span>
       </Link>
 
       {user ? (

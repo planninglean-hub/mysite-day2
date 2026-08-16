@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import HeroBanner from './components/HeroBanner/HeroBanner'
 import VoiceListPage from './pages/VoiceListPage/VoiceListPage'
 import VoiceNewPage from './pages/VoiceNewPage/VoiceNewPage'
@@ -115,6 +116,7 @@ export default function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Footer />
     </>
   )
 }

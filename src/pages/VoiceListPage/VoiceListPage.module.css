@@ -5,13 +5,6 @@
   gap: var(--space-lg);
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-}
-
 .filterRow {
   display: flex;
   gap: var(--space-sm);

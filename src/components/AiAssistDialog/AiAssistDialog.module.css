@@ -68,6 +68,7 @@
   padding: 12px var(--space-lg);
   border-radius: var(--radius-default);
   composes: text-label-lg from global;
+  white-space: nowrap;
   cursor: pointer;
 }
 

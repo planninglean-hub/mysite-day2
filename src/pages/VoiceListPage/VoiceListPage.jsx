@@ -13,10 +13,6 @@ export default function VoiceListPage({ voices, loading, error, categories = [] 
   return (
     <PageContainer>
       <div className={styles.page}>
-        <div className={styles.header}>
-          <h1 className="text-headline-lg">우리 동네 목소리함</h1>
-        </div>
-
         <div className={styles.filterRow}>
           {['전체', ...categories].map((category) => (
             <CategoryChip

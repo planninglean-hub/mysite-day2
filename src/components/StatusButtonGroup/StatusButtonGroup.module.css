@@ -9,6 +9,7 @@
   padding: 10px var(--space-md);
   border: 1px solid transparent;
   composes: text-label-lg from global;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
 }
